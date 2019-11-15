@@ -1,8 +1,15 @@
-﻿@{
+﻿@model DisplayedComicVM
+@{
     ViewData["Title"] = "Comic of the day";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <h3>@Model?.Comic?.Title</h3>
+            <img alt="@Model?.Comic?.Alt" src="@Model?.Comic?.Img" /><br /><br />
+            <p>@Model?.Comic?.Alt</p>
+        </div>
+    </div>
 </div>
+
