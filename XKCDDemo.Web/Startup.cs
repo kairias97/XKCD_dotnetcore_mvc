@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Refit;
+using XKCDDemo.Repository.Implementations;
 using XKCDDemo.Repository.Interfaces;
 
 namespace XKCDDemo.Web
@@ -37,7 +38,7 @@ namespace XKCDDemo.Web
             foreach (var assembly in dependencyAssemblies)
             {
                 var interfaces = assembly.GetTypes()
-                .Where(type => type.IsInterface)
+                .Where(type => type.IsInterface && type != typeof(IXKCDApi))
                 .ToList();
                 var implementations = assembly.GetTypes()
                         .Where(type => type.IsClass && interfaces.Any(si => si.IsAssignableFrom(type)))
