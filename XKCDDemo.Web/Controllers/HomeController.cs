@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace XDCDDemo.Web.Controllers
+namespace XKCDDemo.Web.Controllers
 {
     public class HomeController : Controller
     {

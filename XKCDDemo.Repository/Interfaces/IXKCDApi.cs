@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using XDCDDemo.DTO.ViewModels;
+using XKCDDemo.DTO.ViewModels;
 
-namespace XDCDDemo.Repository.Interfaces
+namespace XKCDDemo.Repository.Interfaces
 {
     public interface IXKCDApi
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace XDCDDemo.DTO.ViewModels
+namespace XKCDDemo.DTO.ViewModels
 {
     public class ComicDetailVM
     {

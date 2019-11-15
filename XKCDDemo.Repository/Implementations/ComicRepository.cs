@@ -1,24 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Refit;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
-using XDCDDemo.DTO.ViewModels;
-using XDCDDemo.Repository.Interfaces;
+using XKCDDemo.DTO.ViewModels;
+using XKCDDemo.Repository.Interfaces;
 
-namespace XDCDDemo.Repository.Implementations
+namespace XKCDDemo.Repository.Implementations
 {
     public class ComicRepository : IComicRepository
     {
         private readonly IXKCDApi _api;
 
-        [ActivatorUtilitiesConstructor]
-        public ComicRepository()
-        {
-            _api = RestService.For<IXKCDApi>("https://xkcd.com/");
-        }
-        //For future testing purposes
         public ComicRepository(IXKCDApi api)
         {
             _api = api;
