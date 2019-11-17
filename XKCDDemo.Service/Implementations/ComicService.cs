@@ -30,11 +30,13 @@ namespace XKCDDemo.Service.Implementations
 
         public async Task<ComicNavigationVM> GetComicNavigationById(int? comicId)
         {
-            if (comicId == null) return new ComicNavigationVM { NextId = null, PreviousId = null };
+            if (comicId == null) return new ComicNavigationVM { NextId = null, PreviousId = null, FirstId = null, LastId = null };
             return new ComicNavigationVM
             {
                 PreviousId = await _comicRepository.GetPreviousComicId(comicId.Value),
-                NextId = await _comicRepository.GetNextComicId(comicId.Value)
+                NextId = await _comicRepository.GetNextComicId(comicId.Value),
+                FirstId = await _comicRepository.GetFirstComicId(),
+                LastId = await _comicRepository.GetLastComicId()
             };
         }
 
@@ -45,7 +47,7 @@ namespace XKCDDemo.Service.Implementations
             return new DisplayedComicVM
             {
                 Comic = comicOfTheDay,
-                Navigation = comicNavigationContext
+                Navigation = comicNavigationContext 
             };
         }
     }
