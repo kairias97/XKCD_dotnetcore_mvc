@@ -1,0 +1,6 @@
+﻿@model DisplayedComicVM
+@{
+    ViewData["Title"] = $"Comic - {Model?.Comic?.SafeTitle}";
+}
+<partial name="_ComicDetailPartial" model="@Model"/>
+
