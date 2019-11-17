@@ -7,5 +7,7 @@ namespace XKCDDemo.Repository.Interfaces
     {
         //[Get("/info.0.json")]
         Task<ComicDetailVM> GetComicOfTheDay();
+        Task<ComicDetailVM> GetComicById(int comicId);
+        Task<int?> GetFirstComicId();
     }
 }
