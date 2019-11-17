@@ -15,14 +15,7 @@ namespace XKCDDemo.Repository.Implementations
         }
         public async Task<ComicDetailVM> GetComicOfTheDay()
         {
-            try
-            {
-                return await _api.GetComicOfTheDay();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return await _api.GetComicOfTheDay();
         }
 
         public async Task<int?> GetFirstComicId()
@@ -32,15 +25,7 @@ namespace XKCDDemo.Repository.Implementations
 
         public async Task<int?> GetLastComicId()
         {
-            try
-            {
-                var comic = await _api.GetComicOfTheDay();
-                return comic.Num;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return (await _api.GetComicOfTheDay())?.Num;
         }
 
         public async Task<int?> GetNextComicId(int comicId)
