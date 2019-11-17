@@ -4,11 +4,17 @@
     <div class="col-12">
 
         <partial name="_ComicNavigationPartial" model="@Model?.Navigation" />
-        <div class="text-center">
-            <h3>@Model?.Comic?.Title</h3>
-            <img class="img-fluid" alt="@Model?.Comic?.Alt" src="@Model?.Comic?.Img" /><br /><br />
-            <p>@Model?.Comic?.Alt</p>
-        </div>
+        <div class=" card text-center">
+            <div class="card-header bg-info">
+                <h2 class="text-light">@Model?.Comic?.Title</h2>
+            </div>
+            <div class="card-body">
+                <img class="img-fluid" alt="@Model?.Comic?.Alt" src="@Model?.Comic?.Img" />
+            </div>
+            <div class="card-footer text-muted bg-info">
+                <p class="text-light">@Model?.Comic?.Alt</p>
+            </div>
+        </div><br />
         <partial name="_ComicNavigationPartial" model="@Model?.Navigation" />
     </div>
 </div>
