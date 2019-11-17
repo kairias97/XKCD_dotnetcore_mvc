@@ -9,6 +9,7 @@ using XKCDDemo.Repository.Interfaces;
 
 namespace XKCDDemo.Repository.Implementations
 {
+
     public class XKCDApiHelper : IXKCDApi
     {
         private readonly HttpClient _httpClient;
@@ -37,6 +38,13 @@ namespace XKCDDemo.Repository.Implementations
             {
                 return null;
             }
+        }
+
+        //Eventually if the api chances and it adds an endpoint to get the initial value id, the only change needed would be here so we keep the repository agnostic of this knowledge
+        public Task<int?> GetFirstComicId()
+        {
+            //This is a simulation since by domain knowledge we know the first comic id will be 1
+            return Task.Run(()  => (int?)1);
         }
     }
 }
