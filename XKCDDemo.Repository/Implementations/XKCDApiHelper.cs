@@ -33,7 +33,7 @@ namespace XKCDDemo.Repository.Implementations
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
