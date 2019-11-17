@@ -57,9 +57,20 @@ namespace XKCDDemo.Repository.Implementations
         public async Task<int?> GetPreviousComicId(int comicId)
         {
             int? firstComicId = await GetFirstComicId();
-            if (firstComicId == null) return null;
-            //The previous comic id will be one id lower than the current comic id;
-            return (comicId - 1 < firstComicId) ? (int?) null : comicId - 1; 
+            int? lastComicId = await GetLastComicId();
+            if (firstComicId == null || lastComicId == null) return null;
+            int? previousComicId = null;
+            //It will fetch and get the reference id of the previous available comic dynamically
+            for (int i = comicId - 1; i >= firstComicId && i <= lastComicId; i--)
+            {
+                var targetComic = await _api.GetComicById(i);
+                if (targetComic != null)
+                {
+                    previousComicId = targetComic.Num;
+                    break;
+                }
+            }
+            return previousComicId;
         }
     }
 }
