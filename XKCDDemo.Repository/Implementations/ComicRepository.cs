@@ -25,6 +25,11 @@ namespace XKCDDemo.Repository.Implementations
             }
         }
 
+        public async Task<int?> GetFirstComicId()
+        {
+            return await _api.GetFirstComicId();
+        }
+
         public async Task<int?> GetLastComicId()
         {
             try

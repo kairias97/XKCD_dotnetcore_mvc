@@ -10,5 +10,6 @@ namespace XKCDDemo.Repository.Interfaces
     {
         Task<ComicDetailVM> GetComicOfTheDay();
         Task<int?> GetLastComicId();
+        Task<int?> GetFirstComicId();
     }
 }
