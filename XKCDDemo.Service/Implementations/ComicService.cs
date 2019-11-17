@@ -30,9 +30,12 @@ namespace XKCDDemo.Service.Implementations
         public async Task<DisplayedComicVM> GetComicOfTheDay()
         {
             var comicOfTheDay = await _comicRepository.GetComicOfTheDay();
+            var comicNavigationContext = await GetComicNavigationById(comicOfTheDay?.Num);
             return new DisplayedComicVM
             {
-                Comic = comicOfTheDay
+                Comic = comicOfTheDay,
+                PreviousId = comicNavigationContext?.PreviousId,
+                NextId = comicNavigationContext?.NextId
             };
         }
     }
