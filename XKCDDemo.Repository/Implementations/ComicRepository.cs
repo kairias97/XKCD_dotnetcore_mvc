@@ -13,6 +13,12 @@ namespace XKCDDemo.Repository.Implementations
         {
             _api = api;
         }
+
+        public async Task<ComicDetailVM> GetComicById(int comicId)
+        {
+            return await _api.GetComicById(comicId);
+        }
+
         public async Task<ComicDetailVM> GetComicOfTheDay()
         {
             return await _api.GetComicOfTheDay();
