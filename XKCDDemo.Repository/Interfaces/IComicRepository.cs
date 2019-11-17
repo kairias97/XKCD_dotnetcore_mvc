@@ -14,5 +14,6 @@ namespace XKCDDemo.Repository.Interfaces
         Task<int?> GetPreviousComicId(int comicId);
         Task<int?> GetNextComicId(int comicId);
         Task<ComicDetailVM> GetComicById(int comicId);
+        Task<RangeValidationResultVM> IsComicInValidRange(int comicId);
     }
 }

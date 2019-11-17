@@ -36,18 +36,52 @@ namespace XKCDDemo.Repository.Implementations
 
         public async Task<int?> GetNextComicId(int comicId)
         {
-            int? lastComicId = await GetLastComicId();
-            if (lastComicId == null) return null;
-            //The next comic id will be one id higher than the current comic id;
-            return (comicId + 1 > lastComicId) ? (int?)null : comicId + 1;
+            int? nextComicId = null;
+            var rangeValidation = await IsComicInValidRange(comicId);
+            if (!rangeValidation?.IsValid ?? false) return null;
+            //It will fetch and get the reference id of the next available comic dynamically
+            for (int i = comicId + 1; i <= rangeValidation?.LastComicId && i >= rangeValidation?.FirstComicId; i++)
+            {
+                var targetComic = await GetComicById(i);
+                if (targetComic != null)
+                {
+                    nextComicId = targetComic.Num;
+                    break;
+                }
+            }
+            return nextComicId;
         }
 
         public async Task<int?> GetPreviousComicId(int comicId)
         {
+            int? previousComicId = null;
+            var rangeValidation = await IsComicInValidRange(comicId);
+            if (!rangeValidation?.IsValid ?? false) return null;
+            //It will fetch and get the reference id of the previous available comic dynamically
+            for (int i = comicId - 1; i >= rangeValidation?.FirstComicId && i <= rangeValidation?.LastComicId; i--)
+            {
+                var targetComic = await GetComicById(i);
+                if (targetComic != null)
+                {
+                    previousComicId = targetComic.Num;
+                    break;
+                }
+            }
+            return previousComicId;
+        }
+
+        public async Task<RangeValidationResultVM> IsComicInValidRange(int comicId)
+        {
+
+            int? lastComicId = await GetLastComicId();
             int? firstComicId = await GetFirstComicId();
-            if (firstComicId == null) return null;
-            //The previous comic id will be one id lower than the current comic id;
-            return (comicId - 1 < firstComicId) ? (int?) null : comicId - 1; 
+            return new RangeValidationResultVM
+            {
+                FirstComicId = firstComicId,
+                LastComicId = lastComicId,
+                IsValid = (lastComicId != null && firstComicId != null 
+                    && comicId >= firstComicId && comicId <= lastComicId)
+            };
         }
     }
 }
