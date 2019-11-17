@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Refit" Version="5.0.15" />
-    <PackageReference Include="Refit.HttpClientFactory" Version="5.0.15" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\XKCDDemo.DTO\XKCDDemo.DTO.csproj" />
     <ProjectReference Include="..\XKCDDemo.Repository\XKCDDemo.Repository.csproj" />
     <ProjectReference Include="..\XKCDDemo.Service\XKCDDemo.Service.csproj" />

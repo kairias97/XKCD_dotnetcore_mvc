@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Refit;
 using XKCDDemo.Repository.Implementations;
 using XKCDDemo.Repository.Interfaces;
 
@@ -27,9 +23,10 @@ namespace XKCDDemo.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //If more clients are added, the strategy of dependencies should change to named dependencies
+            services.AddHttpClient<IXKCDApi, XKCDApiHelper>();
             #region setup of custom services and repositories dependencies
-            services.AddRefitClient<IXKCDApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://xkcd.com/"));
+            //"https://xkcd.com/"
             //For getting all the service layer types using a example type as reference of the assembly and all the persistence dependencies
             var dependencyAssemblies = new[] {
                 Assembly.Load("XKCDDemo.Service"),
