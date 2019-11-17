@@ -17,6 +17,18 @@ namespace XKCDDemo.Service.Implementations
             _comicRepository = comicRepository;
         }
 
+        public async Task<DisplayedComicVM> GetComicDetailById(int comicId)
+        {
+            var comic = await _comicRepository.GetComicById(comicId);
+            var comicNavigationContext = await GetComicNavigationById(comic?.Num);
+            return new DisplayedComicVM
+            {
+                Comic = comic,
+                PreviousId = comicNavigationContext?.PreviousId,
+                NextId = comicNavigationContext?.NextId
+            };
+        }
+
         public async Task<ComicNavigationVM> GetComicNavigationById(int? comicId)
         {
             if (comicId == null) return new ComicNavigationVM { NextId = null, PreviousId = null };
