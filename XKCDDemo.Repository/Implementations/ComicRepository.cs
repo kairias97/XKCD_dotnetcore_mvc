@@ -44,7 +44,7 @@ namespace XKCDDemo.Repository.Implementations
             //It will fetch and get the reference id of the next available comic dynamically
             for (int i = comicId + 1; i <= lastComicId && i >= firstComicId; i++)
             {
-                var targetComic = await _api.GetComicById(i);
+                var targetComic = await GetComicById(i);
                 if (targetComic != null)
                 {
                     nextComicId = targetComic.Num;
@@ -63,7 +63,7 @@ namespace XKCDDemo.Repository.Implementations
             //It will fetch and get the reference id of the previous available comic dynamically
             for (int i = comicId - 1; i >= firstComicId && i <= lastComicId; i--)
             {
-                var targetComic = await _api.GetComicById(i);
+                var targetComic = await GetComicById(i);
                 if (targetComic != null)
                 {
                     previousComicId = targetComic.Num;
