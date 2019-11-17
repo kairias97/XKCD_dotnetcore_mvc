@@ -1,0 +1,12 @@
+﻿@model ComicNavigationVM
+
+<div class="text-center">
+    @if (Model?.PreviousId != null)
+    {
+        <a href="/comic/@Model.PreviousId">Previous</a>
+    }
+    @if (Model?.NextId != null)
+    {
+        <a href="/comic/@Model.NextId">Next</a>
+    }
+</div>

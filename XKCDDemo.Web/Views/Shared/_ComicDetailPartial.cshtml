@@ -2,20 +2,13 @@
 
 <div class="row">
     <div class="col-12">
+
+        <partial name="_ComicNavigationPartial" model="@Model?.Navigation" />
         <div class="text-center">
             <h3>@Model?.Comic?.Title</h3>
             <img class="img-fluid" alt="@Model?.Comic?.Alt" src="@Model?.Comic?.Img" /><br /><br />
             <p>@Model?.Comic?.Alt</p>
         </div>
-        <div class="text-center">
-            @if (Model?.PreviousId != null)
-            {
-                <a href="/comic/@Model.PreviousId">Previous</a>
-            }
-            @if (Model?.NextId != null)
-            {
-                <a href="/comic/@Model.NextId">Next</a>
-            }
-        </div>
+        <partial name="_ComicNavigationPartial" model="@Model?.Navigation" />
     </div>
 </div>

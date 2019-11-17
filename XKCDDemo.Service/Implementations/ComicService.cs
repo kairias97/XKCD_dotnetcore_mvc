@@ -24,8 +24,7 @@ namespace XKCDDemo.Service.Implementations
             return new DisplayedComicVM
             {
                 Comic = comic,
-                PreviousId = comicNavigationContext?.PreviousId,
-                NextId = comicNavigationContext?.NextId
+                Navigation = comicNavigationContext,
             };
         }
 
@@ -46,8 +45,7 @@ namespace XKCDDemo.Service.Implementations
             return new DisplayedComicVM
             {
                 Comic = comicOfTheDay,
-                PreviousId = comicNavigationContext?.PreviousId,
-                NextId = comicNavigationContext?.NextId
+                Navigation = comicNavigationContext
             };
         }
     }
