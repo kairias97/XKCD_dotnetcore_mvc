@@ -27,9 +27,10 @@ namespace XKCDDemo.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //If more clients are added, the strategy of dependencies should change to named dependencies
+            services.AddHttpClient<IXKCDApi, XKCDApiHelper>();
             #region setup of custom services and repositories dependencies
-            services.AddRefitClient<IXKCDApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://xkcd.com/"));
+            //"https://xkcd.com/"
             //For getting all the service layer types using a example type as reference of the assembly and all the persistence dependencies
             var dependencyAssemblies = new[] {
                 Assembly.Load("XKCDDemo.Service"),
