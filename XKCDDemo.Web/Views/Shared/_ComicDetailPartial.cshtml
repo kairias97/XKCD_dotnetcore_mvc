@@ -7,5 +7,15 @@
             <img class="img-fluid" alt="@Model?.Comic?.Alt" src="@Model?.Comic?.Img" /><br /><br />
             <p>@Model?.Comic?.Alt</p>
         </div>
+        <div class="text-center">
+            @if (Model?.PreviousId != null)
+            {
+                <a href="/comic/@Model.PreviousId">Previous</a>
+            }
+            @if (Model?.NextId != null)
+            {
+                <a href="/comic/@Model.NextId">Next</a>
+            }
+        </div>
     </div>
 </div>
