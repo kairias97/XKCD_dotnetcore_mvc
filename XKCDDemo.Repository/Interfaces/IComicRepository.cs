@@ -12,5 +12,6 @@ namespace XKCDDemo.Repository.Interfaces
         Task<int?> GetLastComicId();
         Task<int?> GetFirstComicId();
         Task<int?> GetPreviousComicId(int comicId);
+        Task<int?> GetNextComicId(int comicId);
     }
 }

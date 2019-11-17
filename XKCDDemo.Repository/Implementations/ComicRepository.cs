@@ -43,6 +43,14 @@ namespace XKCDDemo.Repository.Implementations
             }
         }
 
+        public async Task<int?> GetNextComicId(int comicId)
+        {
+            int? lastComicId = await GetLastComicId();
+            if (lastComicId == null) return null;
+            //The next comic id will be one id higher than the current comic id;
+            return (comicId + 1 > lastComicId) ? (int?)null : comicId + 1;
+        }
+
         public async Task<int?> GetPreviousComicId(int comicId)
         {
             int? firstComicId = await GetFirstComicId();
