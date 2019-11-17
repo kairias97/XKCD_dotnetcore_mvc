@@ -21,6 +21,10 @@ namespace XKCDDemo.Web.Controllers
         public async Task<IActionResult> Detail([FromRoute]int id)
         {
             var detail = await _comicService.GetComicDetailById(id);
+            if (detail?.Comic == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(detail);
         }
     }
