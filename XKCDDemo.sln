@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Web", "XKCDDemo.Web\XKCDDemo.Web.csproj", "{C37CACBF-7910-4E00-87EE-22BB6BB35390}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCDDemo.DTO", "XKCDDemo.DTO\XKCDDemo.DTO.csproj", "{6963FC6D-9532-41DF-A775-D86A2E27C1E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.DTO", "XKCDDemo.DTO\XKCDDemo.DTO.csproj", "{6963FC6D-9532-41DF-A775-D86A2E27C1E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCDDemo.Service", "XKCDDemo.Service\XKCDDemo.Service.csproj", "{00ACE1FA-EA0A-4CBA-BF79-1B2788188606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Service", "XKCDDemo.Service\XKCDDemo.Service.csproj", "{00ACE1FA-EA0A-4CBA-BF79-1B2788188606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCDDemo.Repository", "XKCDDemo.Repository\XKCDDemo.Repository.csproj", "{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Repository", "XKCDDemo.Repository\XKCDDemo.Repository.csproj", "{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XDCDDemo.Test", "XDCDDemo.Test\XDCDDemo.Test.csproj", "{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
