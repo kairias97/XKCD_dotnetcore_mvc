@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Service", "XKCDDem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Repository", "XKCDDemo.Repository\XKCDDemo.Repository.csproj", "{B6C4AE8F-E99E-4339-A845-EC5A1F2DA7B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XDCDDemo.Test", "XDCDDemo.Test\XDCDDemo.Test.csproj", "{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XKCDDemo.Test", "XKCDDemo.Test\XKCDDemo.Test.csproj", "{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XKCDDemo.Util", "XKCDDemo.Util\XKCDDemo.Util.csproj", "{7CBFCA8B-5BE8-49C2-988B-75150CEAD20A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6ED9202-EA1A-47C2-8100-B4B47958A6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBFCA8B-5BE8-49C2-988B-75150CEAD20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBFCA8B-5BE8-49C2-988B-75150CEAD20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBFCA8B-5BE8-49C2-988B-75150CEAD20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBFCA8B-5BE8-49C2-988B-75150CEAD20A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\XKCDDemo.DTO\XKCDDemo.DTO.csproj" />
+    <ProjectReference Include="..\XKCDDemo.Util\XKCDDemo.Util.csproj" />
   </ItemGroup>
 
 </Project>
