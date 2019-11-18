@@ -8,7 +8,7 @@ using XKCDDemo.Repository.Implementations;
 using XKCDDemo.Repository.Interfaces;
 using Xunit;
 
-namespace XDCDDemo.Test
+namespace XKCDDemo.Test
 {
     public class ComicRepositoryTest
     {

@@ -8,7 +8,7 @@ using XKCDDemo.Service.Interfaces;
 using XKCDDemo.Web.Controllers;
 using Xunit;
 
-namespace XDCDDemo.Test
+namespace XKCDDemo.Test
 {
     public class ComicControllerTest
     {
