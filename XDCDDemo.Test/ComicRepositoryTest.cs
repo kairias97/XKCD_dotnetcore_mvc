@@ -145,12 +145,41 @@ namespace XDCDDemo.Test
             //Act
             var result = await comicRepository.GetPreviousComicId(mockId);
             var previousComic = await comicRepository.GetComicById(previousValidId ?? default);
+            var firstComicId = await comicRepository.GetFirstComicId();
 
             //Assert
             Assert.Null(result);
             Assert.Equal(previousValidId, result);
             Assert.Null(previousComic);
-       
+            Assert.Equal(firstComicId, mockId);
+
+        }
+
+        [Fact]
+        public async Task Test_No_Next_Comic_When_Current_Is_Last()
+        {
+            //Arrange
+            int mockId = 1000;
+            int? nextValidId = null;
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
+                .ReturnsAsync(GetValidMockedFirstComicId());
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
+                .ReturnsAsync(GetValidMockedComicOfTheDay());
+            mockComicApi.Setup(api => api.GetComicById(nextValidId ?? default))
+                .ReturnsAsync(GetInvalidComic());
+
+            var comicRepository = new ComicRepository(mockComicApi.Object);
+
+            //Act
+            var result = await comicRepository.GetNextComicId(mockId);
+            var nextComic = await comicRepository.GetComicById(nextValidId ?? default);
+            var lastComicId = await comicRepository.GetLastComicId();
+            //Assert
+            Assert.Null(result);
+            Assert.Equal(nextValidId, result);
+            Assert.Null(nextComic);
+            Assert.Equal(lastComicId, mockId);
         }
 
 
