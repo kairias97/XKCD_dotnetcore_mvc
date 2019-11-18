@@ -203,7 +203,7 @@ namespace XDCDDemo.Test
             //Assert
             Assert.Null(result);
             Assert.Equal(previousValidId, result);
-
+            mockComicApi.Verify(mock => mock.GetComicById(mockId - 1), Times.Never());
         }
 
         [Fact]
@@ -228,6 +228,7 @@ namespace XDCDDemo.Test
             //Assert
             Assert.Null(result);
             Assert.Equal(nextValidId, result);
+            mockComicApi.Verify(mock => mock.GetComicById(mockId + 1), Times.Never());
 
         }
 
