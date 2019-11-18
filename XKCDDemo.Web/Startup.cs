@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using XKCDDemo.DTO.ViewModels.Configuration;
 using XKCDDemo.Repository.Implementations;
 using XKCDDemo.Repository.Interfaces;
+using XKCDDemo.Util.Attributes;
 
 namespace XKCDDemo.Web
 {
@@ -35,6 +36,7 @@ namespace XKCDDemo.Web
             };
             foreach (var assembly in dependencyAssemblies)
             {
+                //Excluding the http client
                 var interfaces = assembly.GetTypes()
                 .Where(type => type.IsInterface && type != typeof(IXKCDApi))
                 .ToList();
@@ -43,6 +45,8 @@ namespace XKCDDemo.Web
                         .ToList();
                 foreach (Type currentInterface in interfaces)
                 {
+                    var scopeMetadata = (ScopedAttribute)currentInterface.GetCustomAttribute(typeof(ScopedAttribute));
+                    ScopeCoverage coverage = scopeMetadata?.ScopeCoverage ?? ScopeCoverage.Scoped;
                     //Fetch all the implementations in assembly
                     var currentInterfaceImplementations = implementations
                         .Where(impl => currentInterface.IsAssignableFrom(impl))
@@ -51,7 +55,18 @@ namespace XKCDDemo.Web
                     {
                         foreach (Type specificImplementation in currentInterfaceImplementations)
                         {
-                            services.AddScoped(currentInterface, specificImplementation);
+                            switch (coverage)
+                            {
+                                case ScopeCoverage.Singleton:
+                                    services.AddSingleton(currentInterface, specificImplementation);
+                                    break;
+                                case ScopeCoverage.Scoped:
+                                    services.AddScoped(currentInterface, specificImplementation);
+                                    break;
+                                default:
+                                    services.AddScoped(currentInterface, specificImplementation);
+                                    break;
+                            }
                         }
                     }
                 }

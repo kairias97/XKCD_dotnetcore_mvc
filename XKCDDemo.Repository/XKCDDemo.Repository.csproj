@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\XKCDDemo.DTO\XKCDDemo.DTO.csproj" />
+    <ProjectReference Include="..\XKCDDemo.Util\XKCDDemo.Util.csproj" />
   </ItemGroup>
 
 </Project>
