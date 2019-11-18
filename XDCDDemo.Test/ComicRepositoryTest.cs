@@ -87,7 +87,11 @@ namespace XDCDDemo.Test
             Assert.Equal($"Testing {result.Value}", nextComic.Alt);
             Assert.Equal($"Test comic {result.Value}", nextComic.SafeTitle);
             Assert.Equal($"Test comic {result.Value}", nextComic.Title);
-
+            mockComicApi.Verify(mock => mock.GetComicById(mockId + 1), Times.Once());
+            mockComicApi.Verify(mock => mock.GetComicById(mockId + 2), Times.Once());
+            //Because of the fetch during the act
+            mockComicApi.Verify(mock => mock.GetComicById(nextValidId), Times.Exactly(2));
+            mockComicApi.Verify(mock => mock.GetComicById(mockId + 4), Times.Never());
 
         }
 
@@ -123,6 +127,11 @@ namespace XDCDDemo.Test
             Assert.Equal($"Test comic {result.Value}", previousComic.SafeTitle);
             Assert.Equal($"Test comic {result.Value}", previousComic.Title);
 
+            mockComicApi.Verify(mock => mock.GetComicById(mockId - 1), Times.Once());
+            mockComicApi.Verify(mock => mock.GetComicById(mockId - 2), Times.Once());
+            //Because of the fetch during the act
+            mockComicApi.Verify(mock => mock.GetComicById(previousValidId), Times.Exactly(2));
+            mockComicApi.Verify(mock => mock.GetComicById(mockId - 4), Times.Never());
 
         }
 
