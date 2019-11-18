@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using XKCDDemo.DTO.ViewModels;
+using XKCDDemo.DTO.ViewModels.Configuration;
 using XKCDDemo.Repository.Interfaces;
 
 namespace XKCDDemo.Repository.Implementations
@@ -14,10 +16,10 @@ namespace XKCDDemo.Repository.Implementations
     {
         private readonly HttpClient _httpClient;
 
-        public XKCDApiHelper(HttpClient httpClient)
+        public XKCDApiHelper(HttpClient httpClient, IOptions<ApiConfiguration> config)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("https://xkcd.com/");
+            _httpClient.BaseAddress = new Uri(config.Value.BaseUrl);
         }
 
         public async Task<ComicDetailVM> GetComicById(int comicId)

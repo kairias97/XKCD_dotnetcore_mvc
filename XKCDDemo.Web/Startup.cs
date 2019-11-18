@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using XKCDDemo.DTO.ViewModels.Configuration;
 using XKCDDemo.Repository.Implementations;
 using XKCDDemo.Repository.Interfaces;
 
@@ -57,6 +58,7 @@ namespace XKCDDemo.Web
 
             }
             #endregion
+            services.Configure<ApiConfiguration>(Configuration.GetSection("xkcdApi"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
