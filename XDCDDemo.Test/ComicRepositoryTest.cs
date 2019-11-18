@@ -17,12 +17,12 @@ namespace XDCDDemo.Test
         {
             //Arrange
             int mockId = 10000;
-            var mockComicService = new Mock<IXKCDApi>();
-            mockComicService.Setup(api => api.GetFirstComicId())
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
                 .ReturnsAsync(GetValidMockedFirstComicId());
-            mockComicService.Setup(api => api.GetComicOfTheDay())
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
                 .ReturnsAsync(GetValidMockedComicOfTheDay());
-            var comicRepository = new ComicRepository(mockComicService.Object);
+            var comicRepository = new ComicRepository(mockComicApi.Object);
 
             //Act
             var result = await comicRepository.IsComicInValidRange(mockId);
@@ -39,12 +39,12 @@ namespace XDCDDemo.Test
         {
             //Arrange
             int mockId = 100;
-            var mockComicService = new Mock<IXKCDApi>();
-            mockComicService.Setup(api => api.GetFirstComicId())
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
                 .ReturnsAsync(GetValidMockedFirstComicId());
-            mockComicService.Setup(api => api.GetComicOfTheDay())
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
                 .ReturnsAsync(GetValidMockedComicOfTheDay());
-            var comicRepository = new ComicRepository(mockComicService.Object);
+            var comicRepository = new ComicRepository(mockComicApi.Object);
 
             //Act
             var result = await comicRepository.IsComicInValidRange(mockId);
@@ -55,6 +55,41 @@ namespace XDCDDemo.Test
             Assert.Equal(1000, result.LastComicId);
             Assert.True(result.IsValid);
         }
+        [Fact]
+        public async Task Test_Next_Valid_Comic_When_Current_Is_Not_Last()
+        {
+            //Arrange
+            int mockId = 403;
+            int nextValidId = 406;
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
+                .ReturnsAsync(GetValidMockedFirstComicId());
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
+                .ReturnsAsync(GetValidMockedComicOfTheDay());
+            mockComicApi.Setup(api => api.GetComicById(404))
+                .ReturnsAsync(GetInvalidComic());
+            mockComicApi.Setup(api => api.GetComicById(405))
+                .ReturnsAsync(GetInvalidComic());
+            mockComicApi.Setup(api => api.GetComicById(nextValidId))
+                .ReturnsAsync(GetMockedComicById(nextValidId));
+
+            var comicRepository = new ComicRepository(mockComicApi.Object);
+
+            //Act
+            var result = await comicRepository.GetNextComicId(mockId);
+            var nextComic = await comicRepository.GetComicById(nextValidId);
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(nextValidId, result);
+            Assert.NotNull(nextComic);
+            Assert.Equal(nextComic.Num, result);
+            Assert.Equal($"Testing {result.Value}", nextComic.Alt);
+            Assert.Equal($"Test comic {result.Value}", nextComic.SafeTitle);
+            Assert.Equal($"Test comic {result.Value}", nextComic.Title);
+
+
+        }
+
 
         #region Mock data arrangement
         private int GetValidMockedFirstComicId()
@@ -72,6 +107,23 @@ namespace XDCDDemo.Test
                 Title = "Test comic",
                 SafeTitle = "Test comic",
             };
+        }
+
+        private ComicDetailVM GetMockedComicById(int id)
+        {
+            return new ComicDetailVM
+            {
+                Alt = $"Testing {id}",
+                Img = "http://www.test.com",
+                Num = id,
+                Title = $"Test comic {id}",
+                SafeTitle = $"Test comic {id}",
+            };
+        }
+
+        private ComicDetailVM GetInvalidComic()
+        {
+            return null;
         }
 
         #endregion
