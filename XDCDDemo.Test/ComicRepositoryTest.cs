@@ -55,6 +55,7 @@ namespace XDCDDemo.Test
             Assert.Equal(1000, result.LastComicId);
             Assert.True(result.IsValid);
         }
+
         [Fact]
         public async Task Test_Next_Valid_Comic_When_Current_Is_Not_Last()
         {
@@ -86,6 +87,41 @@ namespace XDCDDemo.Test
             Assert.Equal($"Testing {result.Value}", nextComic.Alt);
             Assert.Equal($"Test comic {result.Value}", nextComic.SafeTitle);
             Assert.Equal($"Test comic {result.Value}", nextComic.Title);
+
+
+        }
+
+        [Fact]
+        public async Task Test_Previous_Valid_Comic_When_Current_Is_Not_First()
+        {
+            //Arrange
+            int mockId = 406;
+            int previousValidId = 403;
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
+                .ReturnsAsync(GetValidMockedFirstComicId());
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
+                .ReturnsAsync(GetValidMockedComicOfTheDay());
+            mockComicApi.Setup(api => api.GetComicById(404))
+                .ReturnsAsync(GetInvalidComic());
+            mockComicApi.Setup(api => api.GetComicById(405))
+                .ReturnsAsync(GetInvalidComic());
+            mockComicApi.Setup(api => api.GetComicById(previousValidId))
+                .ReturnsAsync(GetMockedComicById(previousValidId));
+
+            var comicRepository = new ComicRepository(mockComicApi.Object);
+
+            //Act
+            var result = await comicRepository.GetPreviousComicId(mockId);
+            var previousComic = await comicRepository.GetComicById(previousValidId);
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(previousValidId, result);
+            Assert.NotNull(previousComic);
+            Assert.Equal(previousComic.Num, result);
+            Assert.Equal($"Testing {result.Value}", previousComic.Alt);
+            Assert.Equal($"Test comic {result.Value}", previousComic.SafeTitle);
+            Assert.Equal($"Test comic {result.Value}", previousComic.Title);
 
 
         }
