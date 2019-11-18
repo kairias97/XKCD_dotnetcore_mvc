@@ -34,6 +34,28 @@ namespace XDCDDemo.Test
             Assert.False(result.IsValid);
         }
 
+        [Fact]
+        public async Task Test_ComicId_In_ValidRange()
+        {
+            //Arrange
+            int mockId = 100;
+            var mockComicService = new Mock<IXKCDApi>();
+            mockComicService.Setup(api => api.GetFirstComicId())
+                .ReturnsAsync(GetValidMockedFirstComicId());
+            mockComicService.Setup(api => api.GetComicOfTheDay())
+                .ReturnsAsync(GetValidMockedComicOfTheDay());
+            var comicRepository = new ComicRepository(mockComicService.Object);
+
+            //Act
+            var result = await comicRepository.IsComicInValidRange(mockId);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(1, result.FirstComicId);
+            Assert.Equal(1000, result.LastComicId);
+            Assert.True(result.IsValid);
+        }
+
         #region Mock data arrangement
         private int GetValidMockedFirstComicId()
         {
