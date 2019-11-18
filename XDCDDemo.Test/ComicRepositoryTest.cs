@@ -126,6 +126,33 @@ namespace XDCDDemo.Test
 
         }
 
+        [Fact]
+        public async Task Test_No_Previous_Comic_When_Current_Is_First()
+        {
+            //Arrange
+            int mockId = 1;
+            int? previousValidId = null;
+            var mockComicApi = new Mock<IXKCDApi>();
+            mockComicApi.Setup(api => api.GetFirstComicId())
+                .ReturnsAsync(GetValidMockedFirstComicId());
+            mockComicApi.Setup(api => api.GetComicOfTheDay())
+                .ReturnsAsync(GetValidMockedComicOfTheDay());
+            mockComicApi.Setup(api => api.GetComicById(previousValidId ?? default))
+                .ReturnsAsync(GetInvalidComic());
+
+            var comicRepository = new ComicRepository(mockComicApi.Object);
+
+            //Act
+            var result = await comicRepository.GetPreviousComicId(mockId);
+            var previousComic = await comicRepository.GetComicById(previousValidId ?? default);
+
+            //Assert
+            Assert.Null(result);
+            Assert.Equal(previousValidId, result);
+            Assert.Null(previousComic);
+       
+        }
+
 
         #region Mock data arrangement
         private int GetValidMockedFirstComicId()
